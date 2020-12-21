@@ -14,9 +14,9 @@ You have to set where does the images go
 # do change this to the proper directory
 app.config["IMAGE_UPLOADS"] = r"C:\Users\johny\OneDrive\Desktop\Work\Flask\Flask"
 ```
-interface
+# interface
 ![alt text](https://github.com/johnyu1234/Flask/blob/main/location.jpg?raw=true)
 
 
-login
+# login
 ![alt_text](https://github.com/johnyu1234/Flask/blob/main/login.jpg?raw=true)
