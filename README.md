@@ -1,3 +1,5 @@
 # Flask
 
-This is a flask backend server uses html and css
+This is a python program that uses flask as the backend.
+
+
