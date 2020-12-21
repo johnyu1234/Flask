@@ -34,21 +34,36 @@ def login():
 def upload_file():
     if request.method == "POST":
         if request.files:
-            image = request.files["image_file"]
+            image_0 = request.files["image_file_0"]
+            image_1 = request.files["image_file_1"]
+            image_2 = request.files["image_file_2"]
             location = request.form["location"]
             field = request.form["field"]
             pond  = request.form["pond"]
             file_1=open("location.txt","a")
-            file_1.write(image.filename+" "+location+" "+field+" "+" "+pond)
+            file_1.write(image_0.filename+" "+image_1.filename+" "+image_2.filename+" "+location+" "+field+" "+" "+pond)
             file_1.write("\n")
             file_1.close()
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))                                          
-            if image.filename.find("png")==-1:
+            image_0.save(os.path.join(app.config["IMAGE_UPLOADS"], image_0.filename))                                          
+            image_1.save(os.path.join(app.config["IMAGE_UPLOADS"], image_1.filename))
+            image_2.save(os.path.join(app.config["IMAGE_UPLOADS"], image_2.filename))
+
+            if image_0.filename.find("png")==-1:
                 print("converting to png file ")
-                convert = Image.open(image.filename)
-                convert.save(image.filename[:-3]+'png')
-                os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image.filename)
-                return redirect(request.url)
+                convert = Image.open(image_0.filename)
+                convert.save(image_0.filename[:-3]+'png')
+                os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_0.filename)
+            if image_1.filename.find("png")==-1:
+                print("converting to png file ")
+                convert = Image.open(image_1.filename)
+                convert.save(image_1.filename[:-3]+'png')
+                os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_1.filename)
+            if image_2.filename.find("png")==-1:
+                print("converting to png file ")
+                convert = Image.open(image_2.filename)
+                convert.save(image_2.filename[:-3]+'png')
+                os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_2.filename)
+            return redirect(request.url)
     else:
         return render_template("interface.html")
 
