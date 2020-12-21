@@ -16,5 +16,7 @@ app.config["IMAGE_UPLOADS"] = r"C:\Users\johny\OneDrive\Desktop\Work\Flask\Flask
 ```
 interface
 ![alt text](https://github.com/johnyu1234/Flask/blob/main/location.jpg?raw=true)
+
+
 login
 ![alt_text](https://github.com/johnyu1234/Flask/blob/main/login.jpg?raw=true)
