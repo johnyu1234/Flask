@@ -3,14 +3,16 @@
 This is a python program that uses flask as the backend.
 
 
-To run the code 
+To test run the code 
 ```
 python app.py
+#insert #http://127.0.0.1:5000/ for local testing
+#insert ##http://(IPV4):5000/ for mobile testing 
 ```
 You have to set where does the images go 
 ```
 # do change this to the proper directory
 app.config["IMAGE_UPLOADS"] = r"C:\Users\johny\OneDrive\Desktop\Work\Flask\Flask"
-
 ```
+interface
 
