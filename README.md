@@ -15,8 +15,10 @@ You have to set where does the images go
 app.config["IMAGE_UPLOADS"] = r"C:\Users\johny\OneDrive\Desktop\Work\Flask\Flask"
 ```
 # interface
+has a 3 dropdown box and 3 image file selector 
 ![alt text](https://github.com/johnyu1234/Flask/blob/main/location.jpg?raw=true)
 
 
 # login
+contains cookie to allow old  user to quickly jump to interface without login in 
 ![alt_text](https://github.com/johnyu1234/Flask/blob/main/login.jpg?raw=true)
