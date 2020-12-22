@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for,session,make_response
 import os
+import cv2
 from PIL import Image
 import uuid
 
@@ -44,24 +45,24 @@ def upload_file():
             file_1.write(image_0.filename+" "+image_1.filename+" "+image_2.filename+" "+location+" "+field+" "+" "+pond)
             file_1.write("\n")
             file_1.close()
-            image_0.save(os.path.join(app.config["IMAGE_UPLOADS"], image_0.filename))                                          
+            image_0.save(os.path.join(app.config["IMAGE_UPLOADS"], image_0.filename))
+            print("saving")                                          
             image_1.save(os.path.join(app.config["IMAGE_UPLOADS"], image_1.filename))
             image_2.save(os.path.join(app.config["IMAGE_UPLOADS"], image_2.filename))
-
             if image_0.filename.find("png")==-1:
                 print("converting to png file ")
                 convert = Image.open(image_0.filename)
-                convert.save(image_0.filename[:-3]+'png')
+                convert.save(os.path.splitext(image_0.filename)[0]+'.png')
                 os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_0.filename)
             if image_1.filename.find("png")==-1:
                 print("converting to png file ")
                 convert = Image.open(image_1.filename)
-                convert.save(image_1.filename[:-3]+'png')
+                convert.save(os.path.splitext(image_1.filename)[0]+'.png')
                 os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_1.filename)
             if image_2.filename.find("png")==-1:
                 print("converting to png file ")
                 convert = Image.open(image_2.filename)
-                convert.save(image_2.filename[:-3]+'png')
+                convert.save(os.path.splitext(image_2.filename)[0]+'.png')
                 os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_2.filename)
             return redirect(request.url)
     else:
