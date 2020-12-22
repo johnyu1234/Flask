@@ -18,6 +18,8 @@ app.config["IMAGE_UPLOADS"] = r"C:\Users\johny\OneDrive\Desktop\Work\Flask\Flask
 has a 3 dropdown box and 3 image file selector 
 images that aren't in png will be converted 
 files are converted into maximum of (1000,1000) pixels while maintaining aspect ratio
+
+
 ![alt text](https://github.com/johnyu1234/Flask/blob/main/location.jpg?raw=true)
 
 
