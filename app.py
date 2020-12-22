@@ -35,6 +35,7 @@ def login():
 def upload_file():
     if request.method == "POST":
         if request.files:
+            size = 1000,1000
             image_0 = request.files["image_file_0"]
             image_1 = request.files["image_file_1"]
             image_2 = request.files["image_file_2"]
@@ -52,16 +53,20 @@ def upload_file():
             if image_0.filename.find("png")==-1:
                 print("converting to png file ")
                 convert = Image.open(image_0.filename)
+                convert.thumbnail(size,Image.ANTIALIAS)
                 convert.save(os.path.splitext(image_0.filename)[0]+'.png')
                 os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_0.filename)
             if image_1.filename.find("png")==-1:
                 print("converting to png file ")
                 convert = Image.open(image_1.filename)
+                convert.thumbnail(size,Image.ANTIALIAS)
                 convert.save(os.path.splitext(image_1.filename)[0]+'.png')
                 os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_1.filename)
             if image_2.filename.find("png")==-1:
                 print("converting to png file ")
                 convert = Image.open(image_2.filename)
+                convert.thumbnail(size,Image.ANTIALIAS)
+                print(convert.size)
                 convert.save(os.path.splitext(image_2.filename)[0]+'.png')
                 os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_2.filename)
             return redirect(request.url)
