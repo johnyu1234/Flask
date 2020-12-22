@@ -21,6 +21,6 @@ has a 3 dropdown box and 3 image file selector
 
 
 # login
-contains cookie to allow old  user to quickly jump to interface without login in 
+uses cookie to allow old  user to quickly jump to interface without login in 
 
 ![alt_text](https://github.com/johnyu1234/Flask/blob/main/login.jpg?raw=true)
