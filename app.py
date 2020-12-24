@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for,session,make_response
 import os
-import cv2
+from cv2 import cv2
 from PIL import Image
 import uuid
+import numpy as np
+import base64
+
 
 app = Flask(__name__)
 app.secret_key = b'sdsdssdsdc]/'
@@ -35,40 +38,23 @@ def login():
 def upload_file():
     if request.method == "POST":
         if request.files:
-            size = 1000,1000
-            image_0 = request.files["image_file_0"]
-            image_1 = request.files["image_file_1"]
-            image_2 = request.files["image_file_2"]
+            image = []
+            
+            image.append(request.files["image0"])
+            image.append(request.files["image1"])
+            image.append(request.files["image2"])
             location = request.form["location"]
             field = request.form["field"]
             pond  = request.form["pond"]
-            file_1=open("location.txt","a")
-            file_1.write(image_0.filename+" "+image_1.filename+" "+image_2.filename+" "+location+" "+field+" "+" "+pond)
-            file_1.write("\n")
-            file_1.close()
-            image_0.save(os.path.join(app.config["IMAGE_UPLOADS"], image_0.filename))
-            print("saving")                                          
-            image_1.save(os.path.join(app.config["IMAGE_UPLOADS"], image_1.filename))
-            image_2.save(os.path.join(app.config["IMAGE_UPLOADS"], image_2.filename))
-            if image_0.filename.find("png")==-1:
-                print("converting to png file ")
-                convert = Image.open(image_0.filename)
-                convert.thumbnail(size,Image.ANTIALIAS)
-                convert.save(os.path.splitext(image_0.filename)[0]+'.png')
-                os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_0.filename)
-            if image_1.filename.find("png")==-1:
-                print("converting to png file ")
-                convert = Image.open(image_1.filename)
-                convert.thumbnail(size,Image.ANTIALIAS)
-                convert.save(os.path.splitext(image_1.filename)[0]+'.png')
-                os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_1.filename)
-            if image_2.filename.find("png")==-1:
-                print("converting to png file ")
-                convert = Image.open(image_2.filename)
-                convert.thumbnail(size,Image.ANTIALIAS)
-                print(convert.size)
-                convert.save(os.path.splitext(image_2.filename)[0]+'.png')
-                os.remove(app.config["IMAGE_UPLOADS"] +"\\"+ image_2.filename)
+            #file_1=open("location.txt","a")
+            #file_1.write(image_0.filename+" "+image_1.filename+" "+image_2.filename+" "+location+" "+field+" "+" "+pond)
+            #file_1.write("\n")
+            #file_1.close()
+            img_cv2 = []
+            for img in image:
+                npimg = np.fromfile(img,np.uint8)
+                img_cv2.append(cv2.imdecode(npimg,cv2.IMREAD_COLOR))
+            print(image)
             return redirect(request.url)
     else:
         return render_template("interface.html")
