@@ -5,7 +5,9 @@ from PIL import Image
 import uuid
 import numpy as np
 import base64
-
+location=["Hualien"]
+pond=["1"]
+field=["1"]
 
 app = Flask(__name__)
 app.secret_key = b'sdsdssdsdc]/'
@@ -23,7 +25,7 @@ def login_portal():
         if user_id:
             print(user_id)
 
-            return render_template("interface.html")
+            return render_template("interface.html",location=location,pond=pond,field=field)
         else:
             return render_template("login.html")
         
@@ -38,11 +40,12 @@ def login():
 def upload_file():
     if request.method == "POST":
         if request.files:
-            image = []
-            
+            image = []        
             image.append(request.files["image0"])
             image.append(request.files["image1"])
             image.append(request.files["image2"])
+            form = request.form
+            result = request.form["location"]
             location = request.form["location"]
             field = request.form["field"]
             pond  = request.form["pond"]
@@ -54,10 +57,15 @@ def upload_file():
             for img in image:
                 npimg = np.fromfile(img,np.uint8)
                 img_cv2.append(cv2.imdecode(npimg,cv2.IMREAD_COLOR))
-            print(image)
-            return redirect(request.url)
+                print(img.filename)
+            print(location)
+            print(field)
+            print(pond)
+
+            return render_template("interface.html",location=location,pond=pond,field=field)
+            #return redirect(request.url,form =form)
     else:
-        return render_template("interface.html")
+            return render_template("interface.html",location=location,pond=pond,field=field)
 
 
 app.run(host='0.0.0.0',port=5000)
